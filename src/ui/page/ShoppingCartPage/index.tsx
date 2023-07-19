@@ -1,11 +1,15 @@
 import NavList from "../../component/TopNavBar.tsx";
 import Footer from "../../component/Footer.tsx";
-import { Table} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 import ProductDetailQuantitySelector from "../../component/ProductDetailQuantitySelector.tsx";
-import {useState} from "react";
+import { useState} from "react";
+
 
 export default function ShoppingCartPage(){
     const [quantity, setQuantity] = useState<number>(1);
+
+
+
 
 
     return(
@@ -13,16 +17,17 @@ export default function ShoppingCartPage(){
         <>
         <NavList/>
 
-            <div className="d-flex flex-wrap" style={{ minHeight: "calc(100vh - 12rem)", width:'100%'}}>
+            <div className="d-flex flex-wrap align-content-center" style={{ minHeight: "calc(100vh - 12rem)", width:'100%'}}>
 
                 <div  style={{width:'65%',marginLeft:'4rem'}}>
 
                 <Table  style={{width:'100%'}}>
                     <thead>
                         <tr>
-                            <th>Product No.</th>
-                            <th>Product Pic</th>
-                            <th>Product detail  </th>
+                            <th style={{width:'10%'}}>Product No.</th>
+                            <th style={{width:'30%'}}>Product Pic</th>
+                            <th style={{width:'50%'}}>Product detail </th>
+                            <th style={{width:'10%'}}>subTotal</th>
 
                         </tr>
                     </thead>
@@ -38,8 +43,14 @@ export default function ShoppingCartPage(){
                                     <td>
                                         <p>Low in Stock</p>
                                         <p>$288</p>
-                                        <ProductDetailQuantitySelector quantity={quantity} setQuantity={setQuantity}/>
+                                        <p>Quarity: 5</p>
                                     </td>
+
+                                    <td>
+                                        <ProductDetailQuantitySelector quantity={quantity} setQuantity={setQuantity}/>
+                                        <p>SubTotal: $ 288</p>
+                                    </td>
+
                                 </tr>)
                             })
                     }
@@ -52,11 +63,10 @@ export default function ShoppingCartPage(){
 
 
 
-                <div style={{width:'25%'}}>
-                    Total Amount:
-
+                <div style={{ width: '25%', marginTop: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                    <h4 style={{ marginBottom: '0.5rem' }}>Total Amount:</h4>
+                    <Button style={{ alignSelf: 'flex-end' }}>付款</Button>
                 </div>
-
 
         </div>
 

@@ -3,6 +3,7 @@ import {ProductListDto} from "../../data/dto/ProductListDto.ts";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCartArrowDown} from "@fortawesome/free-solid-svg-icons/faCartArrowDown";
 import  {useState} from "react";
+import {Link} from "react-router-dom";
 
 
 type Props ={
@@ -63,7 +64,11 @@ export default function AllProduct(props:Props){
                 貨品價錢：$ {props.allProductData.price}
             </Card.Text>
 
+
+            <Link to={`/product/${props.allProductData.pid}`}>
            <Button variant="success" style={buttonStyle}>詳細資料</Button>
+            </Link>
+
 
             <Button variant="success" style={paymentButtonStyle}  ><FontAwesomeIcon icon={faCartArrowDown} beatFade size="lg" style={{color: "#184e3b",}} /></Button>
 
