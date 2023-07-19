@@ -26,17 +26,21 @@ export default function ProductDetailQuantitySelector({quantity, setQuantity}: P
             <div className="d-flex">
 
 
-                <Button style={{width: '40px', height: '40px'}}
+                <Button style={{width: '80px', height: '40px',
+                    backgroundImage: "linear-gradient(to right, lightgreen, #ffcccb)",
+                border:0}}
                         onClick={handleMinusButtonClick}>
                     -
                 </Button>
 
                 <div className="d-flex justify-content-center align-items-center"
-                     style={{width: '40px', height: '40px'}}>
+                     style={{width: '80px', height: '40px',border:'1 solid lightgrey'}}>
                     {quantity}
                 </div>
 
-                <Button style={{width: '40px', height: '40px'}}
+                <Button style={{width: '80px', height: '40px',
+                    backgroundImage: "linear-gradient(to right, #ffcccb, lightblue)",
+                border:0}}
                         onClick={handlePlusButtonClick}>
                     +
                 </Button>

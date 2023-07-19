@@ -2,7 +2,7 @@ import {createHashRouter, RouterProvider} from "react-router-dom";
 import ProductListingPage from "./ui/page/ProductListingPage";
 import ProductDetailPage from "./ui/page/ProductDetailPage";
 import ErrorPage from "./ui/page/ErrorPage";
-import ShoppingCart from "./ui/page/ShoppingCart";
+import ShoppingCart from "./ui/page/ShoppingCartPage";
 import LoginPage from "./ui/page/LoginPage";
 
 const router = createHashRouter([

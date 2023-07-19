@@ -28,8 +28,10 @@ return(
                 </Col>
             </Form.Group>
 
-            <Button variant="primary" type="submit">
-                Submit
+            <Button variant="primary" type="submit"
+                    style={{backgroundImage: "linear-gradient(to right, lightgreen, #ffcccb)",
+                    border: 0}}>
+                Login
             </Button>
         </Form>
     </div>

@@ -9,7 +9,11 @@ import { faFacebook ,faSquareInstagram} from "@fortawesome/free-brands-svg-icons
 
 export default function Footer() {
     return (
-        <div style={{ backgroundImage: "linear-gradient(to right, lightgreen, lightblue)" }}>
+        <div style={{ backgroundImage: "linear-gradient(to right, lightgreen, lightblue)",
+            height:'14rem',
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",}}>
             <Container className="footer-container" >
                 <Row>
                     <Col style={{ marginTop: "20px", marginBottom:"50px"}}>

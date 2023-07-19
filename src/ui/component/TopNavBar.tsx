@@ -3,10 +3,18 @@ import {Link} from "react-router-dom";
 import "./TopNavBarStyle.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCartArrowDown} from "@fortawesome/free-solid-svg-icons/faCartArrowDown";
+import {faRightToBracket} from "@fortawesome/free-solid-svg-icons";
 
 export default function NavList(){
 
     const cartButtonStyle = {
+        background: "transparent",
+        marginRight: 40,
+        border: "none",
+        padding: 0,
+    };
+
+    const loginButtonStyle = {
         background: "transparent",
         marginRight: 40,
         border: "none",
@@ -25,6 +33,9 @@ export default function NavList(){
                         </li>
                         <li className="nav-item active">
                             <Link to="/product/1/1" className="nav-link">Product</Link>
+                        </li>
+                        <li className="nav-item active">
+                            <Link to="/product/1/1" className="nav-link">History</Link>
                         </li>
                     </ul>
                 </div>
@@ -48,7 +59,6 @@ export default function NavList(){
 
                         }}>Welcome to Mario World</span>
                     </a>
-
                 </div>
 
 
@@ -63,7 +73,9 @@ export default function NavList(){
 
 
                     <Link to="/login">
-                    <Button variant="outline-primary" style={{ marginRight: '40px' }}>Login</Button>{' '}
+                    <Button variant="outline-primary" style={loginButtonStyle}>
+                        <FontAwesomeIcon icon={faRightToBracket} size="2xl" style={{color: "#184e3b",}} />
+                    </Button>{''}
                     </Link>
                 </div>
             </Nav>
