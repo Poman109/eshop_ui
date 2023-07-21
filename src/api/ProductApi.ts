@@ -16,7 +16,7 @@ export const getAllProducts = async ()=> {
     }
 }
 
-export const getProductsDetail = async (pid:number)=> {
+export const getProductsDetail = async (pid:string)=> {
     try {
 
         const response = await axios.get<ProductDetailDto>(`${baseUrl}/public/product/${pid}`);

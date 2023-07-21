@@ -3,27 +3,52 @@ import {Link} from "react-router-dom";
 import "./TopNavBarStyle.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCartArrowDown} from "@fortawesome/free-solid-svg-icons/faCartArrowDown";
-import {faRightToBracket} from "@fortawesome/free-solid-svg-icons";
+import  {useContext} from "react";
+import {loginUserContext} from "../../App.tsx";
+import * as FirebaseAuthService from "../../authService/FirebaseAuthService.ts"
+import {faFingerprint} from "@fortawesome/free-solid-svg-icons/faFingerprint";
 
 export default function NavList(){
+    const loginUser = useContext(loginUserContext);
+
+    const renderLoginContainer = ()=>{
+        if(loginUser){
+            return <>
+                <FontAwesomeIcon icon={faFingerprint} size="2xl" style={{color: "#1d4281",marginRight:'1rem'}} />
+                <Button style={loginButtonStyle} onClick={FirebaseAuthService.handleSignOut}>Logout</Button>
+            </>
+        } else {
+            return    <Link to="/login" style={{textDecoration: 'none'}}>
+                <Button  style={loginButtonStyle} >
+                   Login
+                </Button>{''}
+            </Link>
+        }
+    }
+
 
     const cartButtonStyle = {
         background: "transparent",
+        width: 45,
         marginRight: 40,
-        border: "none",
+        border: "0",
         padding: 0,
     };
 
     const loginButtonStyle = {
+        width:'4rem',
         background: "transparent",
         marginRight: 40,
-        border: "none",
         padding: 0,
+        border: '1px solid #184e3b', // Add border style here
+        color: '#184e3b', // Add text color here
+        textDecoration: 'none',
     };
 
     return (
         <>
-            <Nav className="sticky-top navbar navbar-expand-sm navbar-light bg-light d-flex" style={{ backgroundImage: "linear-gradient(to right, #87CEEB, lightgreen)" }}>
+            <Nav className="sticky-top navbar navbar-expand-sm navbar-light bg-light d-flex"
+                 style={{ backgroundImage: "linear-gradient(to right, #87CEEB, lightgreen)" }}>
 
                 <div className="collaspe navbar-collapse" id="navbarNav" style={{ marginLeft: '40px' }}>
 
@@ -31,9 +56,7 @@ export default function NavList(){
                         <li className="nav-item active">
                             <Link to="/" className="nav-link">Home</Link>
                         </li>
-                        <li className="nav-item active">
-                            <Link to="/product/1/1" className="nav-link">Product</Link>
-                        </li>
+
                         <li className="nav-item active">
                             <Link to="/product/1/1" className="nav-link">History</Link>
                         </li>
@@ -57,7 +80,7 @@ export default function NavList(){
                             color:'#246078'
 
 
-                        }}>Welcome to Mario World</span>
+                        }}>Mario World</span>
                     </a>
                 </div>
 
@@ -65,19 +88,18 @@ export default function NavList(){
 
 
                 <div className="justify-content-between">
-                    <Link to="/shoppingcart">
-                    <Button variant="outline-primary" style={cartButtonStyle}>
+                    <Link to="/shoppingcart" style={{textDecoration: 'none'}}>
+                    <Button variant="outline-info" style={cartButtonStyle}>
                         <FontAwesomeIcon icon={faCartArrowDown}  size="xl" style={{ color: "#184e3b" }} />
                     </Button>{' '}
                      </Link>
 
 
-                    <Link to="/login">
-                    <Button variant="outline-primary" style={loginButtonStyle}>
-                        <FontAwesomeIcon icon={faRightToBracket} size="2xl" style={{color: "#184e3b",}} />
-                    </Button>{''}
-                    </Link>
+
+                    {renderLoginContainer()}
+
                 </div>
+
             </Nav>
         </>
     );

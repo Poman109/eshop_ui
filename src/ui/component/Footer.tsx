@@ -15,10 +15,11 @@ export default function Footer() {
             justifyContent: "center",
             alignItems: "center",}}>
             <Container className="footer-container" >
-                <Row>
+                <Row style={{color:'#113746'}}>
                     <Col style={{ marginTop: "20px", marginBottom:"50px"}}>
                         <strong style={{marginLeft:"-12px"}}>關於我們</strong>
-                        <Row>--------------</Row>
+                        <hr style={{marginLeft:"-12px",width: '180px', textAlign: 'center',color:'black',
+                        }}></hr>
                         <Row>公司資料</Row>
                         <Row>廣告查詢</Row>
                         <Row>使用條款</Row>
@@ -27,7 +28,8 @@ export default function Footer() {
 
                     <Col style={{ marginTop: "20px" }}>
                        <strong style={{marginLeft:"-12px"}}>資料查詢</strong>
-                        <Row>--------------</Row>
+                        <hr style={{marginLeft:"-12px",width: '180px', textAlign: 'center',color:'black',
+                        }}></hr>
                         <Row>常見問題</Row>
                         <Row>關於送貨</Row>
                         <Row>關於退貨</Row>
@@ -37,7 +39,8 @@ export default function Footer() {
 
                     <Col style={{ marginTop: "20px" }}>
                         <strong style={{marginLeft:"-12px"}}>購物指南</strong>
-                        <Row>--------------</Row>
+                        <hr style={{marginLeft:"-12px",width: '180px', textAlign: 'center',color:'black',
+                        }}></hr>
                         <Row>新手攻略</Row>
                         <Row>憑積分消費</Row>
                     </Col>

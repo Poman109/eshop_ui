@@ -44,7 +44,7 @@ export default function ProductDetailContainer({productDetailsData}:Props){
                                     default/dw1459d1a2/7/0/2/9/7029f8146d239c418f6f296642458227218a7900_supermario_color_343x343.png?q=75"/>
 
 
-                                <Card.Title>{productDetailsData?.name}</Card.Title>
+                                <Card.Title>{productDetailsData?.name}</Card.Title><br/>
 
                                 <Card.Subtitle className="mb-2 text-muted">$ {productDetailsData?.price}</Card.Subtitle>
 
@@ -58,7 +58,8 @@ export default function ProductDetailContainer({productDetailsData}:Props){
                                 </Card.Text>
 
 
-                                {productDetailsData.stock > 0 ? (
+                                {productDetailsData.stock > 0
+                                    ? (
                                     <div>
                                         <ProductDetailQuantitySelector
                                             quantity={quantity}
@@ -70,9 +71,9 @@ export default function ProductDetailContainer({productDetailsData}:Props){
                                                 <FontAwesomeIcon icon={faCartArrowDown} beatFade size="lg" style={{ color: "#184e3b" }} />
                                             </Button>
                                         </div>
-                                    </div>
-                                ) : (
-                                    <p>"售罄"</p>
+                                    </div>)
+                                    : (
+                                    <p>售罄</p>
                                 )}
 
 
