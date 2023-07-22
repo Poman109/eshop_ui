@@ -3,8 +3,12 @@ import Footer from "../../component/Footer.tsx";
 import "../../component/TopNavBarStyle.css"
 import {Button, Table} from "react-bootstrap";
 import ProductDetailQuantitySelector from "../../component/ProductDetailQuantitySelector.tsx";
-import { useState} from "react";
+import  {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {CartItemDataDto} from "../../../data/dto/CartItemDto.ts";
+import mockData from "./response.json"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTrashCan} from "@fortawesome/free-regular-svg-icons";
 
 
 
@@ -12,9 +16,12 @@ import {Link} from "react-router-dom";
 
 export default function ShoppingCartPage(){
     const [quantity, setQuantity] = useState<number>(1);
+    const [cartItemDetailsData, setcartItemDetailsData] = useState<CartItemDataDto[] |undefined>(undefined)
 
 
-
+    useEffect(()=>{
+        setcartItemDetailsData(mockData)
+    },[])
 
 
     return(
@@ -24,38 +31,63 @@ export default function ShoppingCartPage(){
 
             <div className="d-flex flex-wrap align-content-center" style={{ minHeight: "calc(100vh - 12rem)", width:'100%'}}>
 
-                <div  style={{width:'65%',marginLeft:'4rem'}}>
+                <div  style={{width:'65%',margin:'0 0 4rem 4rem'}}>
 
                 <Table  style={{width:'100%'}}>
-                    <thead >
+                    <thead style={{fontSize:'18px'}}>
                         <tr>
-                            <th style={{width:'10%',color: "#1d6a88" }}>Product No.</th>
-                            <th style={{width:'30%',color: "#1d6a88"}}>Product Pic</th>
-                            <th style={{width:'50%',color: "#1d6a88"}}>Product detail </th>
-                            <th style={{width:'10%',color: "#1d6a88"}}>subTotal</th>
+                            <th style={{width:'30%',color: "#1d6a88"}}>購物車</th>
+                            <th style={{width:'40%',color: "#1d6a88"}}></th>
+                            <th style={{width:'10%',color: "#1d6a88"}}></th>
+                            <th style={{width:'10%',color: "#1d6a88"}}></th>
+                            <th style={{width:'10%',color: "#96999a"}}></th>
 
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style={{fontSize:'14px'}}>
 
 
                     {
-                        Array.from({length:2}).map(()=>{
+                        cartItemDetailsData &&
+                        cartItemDetailsData.map((value)=>{
                                 return(<tr>
-                                    <td>1</td>
-                                    <img  src="https://shopage.s3.amazonaws.com/media/f857/000345666404_60037893044840803973.webp"
-                                          style={{width:'10rem',height:'9rem'}}/>
+
+                                    <td><img  src={value.image_url}
+                                          style={{width:'7rem',height:'6rem'}}/>
+                                        </td>
                                     <td>
                                         <p>Low in Stock</p>
-                                        <p>$288</p>
-                                        <p>Quarity: 5</p>
+                                        <p>貸品價錢： $ {value.price}</p>
+                                        <p>貸品數量：  {value.cart_quantity}</p>
                                     </td>
 
                                     <td>
-                                        <ProductDetailQuantitySelector quantity={quantity} setQuantity={setQuantity} />
-                                        <br/>
-                                        <p>SubTotal: $ 288</p>
+
+                                        {
+                                            (value.stock > 0
+                                            ? (
+                                                <div>
+                                                    <ProductDetailQuantitySelector
+                                                        quantity={quantity}
+                                                        setQuantity={setQuantity}
+                                                        stock={value.stock} />
+                                                    <br />
+
+                                                </div>)
+                                            : (
+                                                <p>售罄</p>
+                                            ))
+
+                                        }
+
                                     </td>
+                                    <td>貨品小計</td>
+                                    <td><Button
+                                        style={{backgroundColor:'#f0f2f3',
+                                        borderColor:'#c5c6c7',
+                                    }}><FontAwesomeIcon icon={faTrashCan} style={{color: "#8c9bb5",}} /></Button></td>
+
+
 
                                 </tr>)
                             })
@@ -69,8 +101,9 @@ export default function ShoppingCartPage(){
 
 
 
-                <div style={{ width: '25%', margin: '2rem 0 0 1rem',
+                <div style={{ width: '25%', margin: '2rem 0 4rem 1rem',
                     display: 'flex', flexDirection: 'column',
+                    borderRadius:'4px',
                     alignItems: 'flex-start',
                     backgroundColor:'#e1e9ec',
                     color:'#1d6a88'
@@ -78,12 +111,14 @@ export default function ShoppingCartPage(){
                     <h4 style={{ margin:'1rem 0 0 1rem' }}>總額:</h4><br/>
 
                     <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>商品總額 $  288</p>
-                    <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>運費 $  40</p>
 
+
+
+
+                    <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>運費 $  40</p>
                     <hr style={{width: '180px', textAlign: 'center',color:'black',
                         alignSelf: 'flex-end',marginRight:'1rem'
                     }}></hr>
-
                     <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>訂單總額:$  318</p><br/>
                     <Link to={"/checkout/:transactionId"} style={{alignSelf: 'flex-end',marginRight:'1rem'}}>
                     <Button className='bouncing-image'

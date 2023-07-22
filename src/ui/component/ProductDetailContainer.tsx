@@ -13,7 +13,7 @@ export default function ProductDetailContainer({productDetailsData}:Props){
     const [quantity, setQuantity] = useState<number>(1);
 
     const paymentButtonStyle = {
-        width: "30rem",
+        width: "20rem",
         backgroundImage: "linear-gradient(to right, #ffcccb, lightblue)",
         border: "0"
     };
@@ -22,22 +22,23 @@ export default function ProductDetailContainer({productDetailsData}:Props){
     return(
         <>
 
-            <Container>
-                <Row className="justify-content-center">
+            <Container >
+                <Row className="d-flex justify-content-center" style={{width:'100%',margin:'2rem 4rem 0 0'}}>
 
-                    <Col md={6}>
-                        <div style={{width: '30rem', height: '35rem'}}>
-                            <Image src={
+                    <Col md={6} style={{width: '40%'}}>
+                        <div  className='d-flex justify-content-center align-items-center'
+                              style={{width: '35%', height: '35rem',marginLeft:'8rem'}}>
+                            <Image style={{width:'30rem',height:'30rem'}} src={
                                 productDetailsData &&
                                 productDetailsData.image_url
-                            } fluid
-                                   style={{width: '25rem', margin: "3rem 0 0 5rem"}}/>
+                            }
+                                  />
                         </div>
                     </Col>
 
 
-                    <Col md={6}>
-                        <Card style={{width: '35rem', margin: "3rem 0 0 3rem"}}>
+                    <Col md={6} style={{width: '60%'}}>
+                        <Card style={{marginLeft:'6rem'}}>
                             <Card.Body>
                                 <img style={{width: "4rem"}}
                                      src="https://www.toysrus.com.hk/dw/image/v2/BDGJ_PRD/on/demandware.static/-/Sites-storefront-catalog-toysrus-hk/
@@ -73,7 +74,11 @@ export default function ProductDetailContainer({productDetailsData}:Props){
                                         </div>
                                     </div>)
                                     : (
-                                    <p>售罄</p>
+                                    <p style={{width:'42px',
+                                        backgroundColor:'#e31a08',
+                                        color:'white',
+                                        fontSize:'20px'
+                                    }}>售罄</p>
                                 )}
 
 

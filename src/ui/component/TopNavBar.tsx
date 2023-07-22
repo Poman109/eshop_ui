@@ -57,9 +57,7 @@ export default function NavList(){
                             <Link to="/" className="nav-link">Home</Link>
                         </li>
 
-                        <li className="nav-item active">
-                            <Link to="/product/1/1" className="nav-link">History</Link>
-                        </li>
+
                     </ul>
                 </div>
 

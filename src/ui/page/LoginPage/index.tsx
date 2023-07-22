@@ -27,6 +27,9 @@ export default function LoginPage(){
 
     }
 
+
+
+
     useEffect(()=>{
         if(loginUser){
             navigate("/");
@@ -70,7 +73,7 @@ export default function LoginPage(){
                         Sign in
                     </Button><br/><br/>
 
-
+                    <hr style={{width:'80%'}}/>
 
                     <div>
                         <Button style={{width:"20rem",

@@ -36,7 +36,7 @@ export default function PaymentForm(){
                         </div>
                         <div className="col-12">
                             <div className="btn btn-primary mb-3">
-                                <span className="ps-3">Confirm</span>
+                                <span className="ps-3" style={{marginRight:'22px'}}>確認付款</span>
                                 <span className="fas fa-arrow-right"></span>
                             </div>
                         </div>

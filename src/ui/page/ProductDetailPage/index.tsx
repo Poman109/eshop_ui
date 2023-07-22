@@ -2,7 +2,6 @@
 import NavList from "../../component/TopNavBar.tsx";
 import Footer from "../../component/Footer.tsx";
 import {ProductDetailDto} from "../../../data/dto/ProductListDto.ts";
-// import mockData from "./response.json"
 import {useEffect, useState} from "react";
 // import React from 'react';
 // import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -55,9 +54,14 @@ export default function ProductDetailPage() {
     return (
         <>
             <NavList/>
-            {
-                renderProductDetailContainer()
-            }
+            <div>
+
+                {
+                    renderProductDetailContainer()
+                }
+
+
+            </div>
 
             <Footer/>
 

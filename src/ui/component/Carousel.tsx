@@ -16,8 +16,8 @@ export default function MyCarousel() {
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                    <h3>Slide 1</h3>
-                    <p>Description for Slide 1</p>
+                    <h3 style={{margin:'2rem 6rem 0 0'}}><img src='https://media0.giphy.com/media/Idf7YinhBQpJKshLwc/giphy.gif?cid=6c09b952cys3276hwahi7u6nmovpn7pk0a3jpr9ot82cnfsy&ep=v1_stickers_related&rid=giphy.gif&ct=s'/></h3>
+                    {/*<p>07/19/2023</p>*/}
                 </Carousel.Caption>
             </Carousel.Item>
 
@@ -30,9 +30,9 @@ export default function MyCarousel() {
                     height="600px"
                     alt="Second slide"
                 />
-                <Carousel.Caption>
-                    <h3>Slide 2</h3>
-                    <p>Description for Slide 2</p>
+                <Carousel.Caption style={{margin:'0 0 16rem 0', fontSize:'50px'}}>
+                    <p>New Collection</p>
+                    <p>Launch on 10/11/2023</p>
                 </Carousel.Caption>
             </Carousel.Item>
 
@@ -48,8 +48,8 @@ export default function MyCarousel() {
                     alt="Second slide"
                 />
                 <Carousel.Caption>
-                    <h3>Slide 3</h3>
-                    <p>Description for Slide 2</p>
+                    <h3><img style={{width:'740px',height:'300px',margin:'0 0 0 0'}} src='https://mario.wiki.gallery/images/6/61/Mario_Day_Logo.png'/></h3>
+                    <h3 style={{marginBottom:'10rem'}}>10 March</h3>
                 </Carousel.Caption>
             </Carousel.Item>
 
