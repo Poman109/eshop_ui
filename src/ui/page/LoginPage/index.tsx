@@ -24,10 +24,14 @@ export default function LoginPage(){
         event.preventDefault();
         const isLogin = await FirebaseAuthService.handleSignInWithEmailAndPassword(email,password);
         navigate(-1);
-
     }
 
-
+    const handleGoogleSignIn = async ()=> {
+        const isLogin = await FirebaseAuthService.handleSignInWithGoogle();
+        if (isLogin) {
+         navigate(-1);
+      }
+    }
 
 
     useEffect(()=>{
@@ -76,7 +80,7 @@ export default function LoginPage(){
                     <hr style={{width:'80%'}}/>
 
                     <div>
-                        <Button style={{width:"20rem",
+                        <Button onClick={handleGoogleSignIn} style={{width:"20rem",
                             backgroundImage:"linear-gradient(to right, white, #ffcccb)",
                             border:'0',
                             color:'#236b88'

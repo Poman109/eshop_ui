@@ -1,9 +1,12 @@
-import {Button, Card, Col, Container, Image, Row} from "react-bootstrap";
-import React, {useState} from "react";
-import ProductDetailQuantitySelector from "./ProductDetailQuantitySelector.tsx";
+import {Button, Card, Col, Container, Image, OverlayTrigger, Row, Toast, Tooltip} from "react-bootstrap";
+import React, {useContext, useState} from "react";
+import Selector from "./Selector.tsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCartArrowDown} from "@fortawesome/free-solid-svg-icons/faCartArrowDown";
 import {ProductDetailDto} from "../../data/dto/ProductListDto.ts";
+import * as CartItemApi from "../../api/CartItemApi.ts"
+import {loginUserContext} from "../../App.tsx";
+import {useNavigate} from "react-router-dom";
 
 
 type Props = {
@@ -11,12 +14,49 @@ type Props = {
 }
 export default function ProductDetailContainer({productDetailsData}:Props){
     const [quantity, setQuantity] = useState<number>(1);
+    const [show,setShow]=useState<boolean>(false);
+    const loginUser = useContext(loginUserContext);
+    const navigate = useNavigate();
 
     const paymentButtonStyle = {
         width: "20rem",
         backgroundImage: "linear-gradient(to right, #ffcccb, lightblue)",
         border: "0"
     };
+
+    const handleAddToCart = async ()=>{
+        try{
+            await CartItemApi.putCartItem(productDetailsData.pid,quantity);
+            setShow(true);
+        } catch (error){
+            console.log(error);
+        }
+    }
+
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props} >
+          <span >請先登入！！</span>
+        </Tooltip>
+    );
+
+    const renderAddToCartButton = ()=>{
+        if(loginUser){
+            return  <Button variant="success" style={paymentButtonStyle} onClick={handleAddToCart}>
+                <FontAwesomeIcon icon={faCartArrowDown} beatFade size="lg" style={{ color: "#184e3b" }} />
+            </Button>
+        } else {
+            return   <OverlayTrigger
+                placement="right"
+                delay={{ show: 250, hide: 400 }}
+                overlay={renderTooltip}
+            >
+                <Button variant="success" style={paymentButtonStyle} onClick={()=>{navigate("/login")}}>
+                    <FontAwesomeIcon icon={faCartArrowDown} beatFade size="lg" style={{ color: "#184e3b" }} />
+                </Button>
+            </OverlayTrigger>
+        }
+    }
+
 
 
     return(
@@ -62,15 +102,15 @@ export default function ProductDetailContainer({productDetailsData}:Props){
                                 {productDetailsData.stock > 0
                                     ? (
                                     <div>
-                                        <ProductDetailQuantitySelector
+                                        <Selector
                                             quantity={quantity}
                                             setQuantity={setQuantity}
                                             stock={productDetailsData.stock} />
                                         <br />
                                         <div>
-                                            <Button variant="success" style={paymentButtonStyle}>
-                                                <FontAwesomeIcon icon={faCartArrowDown} beatFade size="lg" style={{ color: "#184e3b" }} />
-                                            </Button>
+                                            {
+                                                renderAddToCartButton()
+                                            }
                                         </div>
                                     </div>)
                                     : (
@@ -80,13 +120,27 @@ export default function ProductDetailContainer({productDetailsData}:Props){
                                         fontSize:'20px'
                                     }}>售罄</p>
                                 )}
-
-
+                                <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide
+                                    style={{
+                                        position:'absolute',
+                                        bottom:'0',
+                                        right:'2rem'
+                                    }}
+                                >
+                                    <Toast.Header>
+                                        <img
+                                            src="holder.js/20x20?text=%20"
+                                            className="rounded me-2"
+                                            alt=""
+                                        />
+                                        <small>剛剛</small>
+                                    </Toast.Header>
+                                    <Toast.Body>已成功加入購物車!</Toast.Body>
+                                </Toast>
 
 
                             </Card.Body>
                         </Card>
-
                     </Col>
 
                 </Row>

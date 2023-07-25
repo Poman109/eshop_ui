@@ -1,28 +1,56 @@
 import NavList from "../../component/TopNavBar.tsx";
 import Footer from "../../component/Footer.tsx";
 import "../../component/TopNavBarStyle.css"
-import {Button, Table} from "react-bootstrap";
-import ProductDetailQuantitySelector from "../../component/ProductDetailQuantitySelector.tsx";
-import  {useEffect, useState} from "react";
-import {Link} from "react-router-dom";
+import {Button} from "react-bootstrap";
+import {useContext, useEffect, useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import {CartItemDataDto} from "../../../data/dto/CartItemDto.ts";
-import mockData from "./response.json"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTrashCan} from "@fortawesome/free-regular-svg-icons";
+import ShoppingCartTable from "../../component/ShoppingCartTable.tsx";
+import * as CartItemApi from "../../../api/CartItemApi.ts"
+import {loginUserContext} from "../../../App.tsx";
 
 
 
 
 
 export default function ShoppingCartPage(){
-    const [quantity, setQuantity] = useState<number>(1);
-    const [cartItemDetailsData, setcartItemDetailsData] = useState<CartItemDataDto[] |undefined>(undefined)
+    const [cartItemDetailsData, setCartItemDetailsData] = useState<CartItemDataDto[] |undefined>(undefined)
+    const navigate = useNavigate();
+    const loginUser = useContext(loginUserContext);
 
+
+    const getAllCartItem = async () =>{
+        try{
+            const data = await CartItemApi.getAllCartItems();
+            setCartItemDetailsData(data);
+
+        }catch (error){
+            navigate("/error");
+        }
+    }
 
     useEffect(()=>{
-        setcartItemDetailsData(mockData)
-    },[])
+        if (loginUser){
+            setCartItemDetailsData(undefined)
+            getAllCartItem();
+        } else if (loginUser ===null){
+            navigate("/login");
+        }
+    },[loginUser]);
 
+    const calculateTotal = ()=>{
+        if(cartItemDetailsData){
+            return cartItemDetailsData.reduce((accumulator, currentValue)=>{
+                return accumulator + currentValue.price *currentValue.cart_quantity;
+            },0);
+        } else {
+            return 0;
+        }
+    }
+
+    const calculateTotalShipping = ()=>{
+       return  calculateTotal() + 20
+    }
 
     return(
 
@@ -33,70 +61,8 @@ export default function ShoppingCartPage(){
 
                 <div  style={{width:'65%',margin:'0 0 4rem 4rem'}}>
 
-                <Table  style={{width:'100%'}}>
-                    <thead style={{fontSize:'18px'}}>
-                        <tr>
-                            <th style={{width:'30%',color: "#1d6a88"}}>購物車</th>
-                            <th style={{width:'40%',color: "#1d6a88"}}></th>
-                            <th style={{width:'10%',color: "#1d6a88"}}></th>
-                            <th style={{width:'10%',color: "#1d6a88"}}></th>
-                            <th style={{width:'10%',color: "#96999a"}}></th>
+                    <ShoppingCartTable cartItemDetailsData={cartItemDetailsData} setCartItemDetailsData={setCartItemDetailsData}/>
 
-                        </tr>
-                    </thead>
-                    <tbody style={{fontSize:'14px'}}>
-
-
-                    {
-                        cartItemDetailsData &&
-                        cartItemDetailsData.map((value)=>{
-                                return(<tr>
-
-                                    <td><img  src={value.image_url}
-                                          style={{width:'7rem',height:'6rem'}}/>
-                                        </td>
-                                    <td>
-                                        <p>Low in Stock</p>
-                                        <p>貸品價錢： $ {value.price}</p>
-                                        <p>貸品數量：  {value.cart_quantity}</p>
-                                    </td>
-
-                                    <td>
-
-                                        {
-                                            (value.stock > 0
-                                            ? (
-                                                <div>
-                                                    <ProductDetailQuantitySelector
-                                                        quantity={quantity}
-                                                        setQuantity={setQuantity}
-                                                        stock={value.stock} />
-                                                    <br />
-
-                                                </div>)
-                                            : (
-                                                <p>售罄</p>
-                                            ))
-
-                                        }
-
-                                    </td>
-                                    <td>貨品小計</td>
-                                    <td><Button
-                                        style={{backgroundColor:'#f0f2f3',
-                                        borderColor:'#c5c6c7',
-                                    }}><FontAwesomeIcon icon={faTrashCan} style={{color: "#8c9bb5",}} /></Button></td>
-
-
-
-                                </tr>)
-                            })
-                    }
-
-
-                    </tbody>
-
-                </Table>
                 </div>
 
 
@@ -108,18 +74,18 @@ export default function ShoppingCartPage(){
                     backgroundColor:'#e1e9ec',
                     color:'#1d6a88'
                 }}>
-                    <h4 style={{ margin:'1rem 0 0 1rem' }}>總額:</h4><br/>
+                    <h4 style={{ margin:'1rem 0 0 1rem' }}>總額: </h4><br/>
 
-                    <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>商品總額 $  288</p>
-
-
+                    <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>商品總額 $  {calculateTotal().toLocaleString()}</p>
 
 
-                    <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>運費 $  40</p>
+
+
+                    <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>手續費 $  20</p>
                     <hr style={{width: '180px', textAlign: 'center',color:'black',
                         alignSelf: 'flex-end',marginRight:'1rem'
                     }}></hr>
-                    <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>訂單總額:$  318</p><br/>
+                    <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>訂單總額:$ {calculateTotalShipping().toLocaleString()}</p><br/>
                     <Link to={"/checkout/:transactionId"} style={{alignSelf: 'flex-end',marginRight:'1rem'}}>
                     <Button className='bouncing-image'
                             style={{

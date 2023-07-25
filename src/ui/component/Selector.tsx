@@ -4,12 +4,12 @@ import React from "react";
 
 type Props = {
     quantity: number,
-    setQuantity: React.Dispatch<React.SetStateAction<number>>
+    setQuantity: React.Dispatch<React.SetStateAction<number>>,
     stock : number
 
 }
 
-export default function ProductDetailQuantitySelector({quantity, setQuantity,stock}: Props) {
+export default function Selector({quantity, setQuantity,stock}: Props) {
     const handleMinusButtonClick = () => {
         if (quantity > 1) {
             setQuantity((prevState) => (prevState - 1));

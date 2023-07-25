@@ -16,8 +16,7 @@ export default function MyCarousel() {
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                    <h3 style={{margin:'2rem 6rem 0 0'}}><img src='https://media0.giphy.com/media/Idf7YinhBQpJKshLwc/giphy.gif?cid=6c09b952cys3276hwahi7u6nmovpn7pk0a3jpr9ot82cnfsy&ep=v1_stickers_related&rid=giphy.gif&ct=s'/></h3>
-                    {/*<p>07/19/2023</p>*/}
+                    <h3 style={{fontSize:'50px',margin:'2rem 0 20rem 0'}}>New Arrival !!!</h3>
                 </Carousel.Caption>
             </Carousel.Item>
 

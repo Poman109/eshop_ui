@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 // import React from 'react';
 // import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 // import {faCartArrowDown} from "@fortawesome/free-solid-svg-icons/faCartArrowDown";
-// import ProductDetailQuantitySelector from "../../component/ProductDetailQuantitySelector.tsx";
+// import Selector from "../../component/Selector.tsx";
 import {useNavigate, useParams} from "react-router-dom";
 import * as ProductApi from "../../../api/ProductApi.ts"
 import ProductDetailContainer from "../../component/ProductDetailContainer.tsx";
