@@ -46,9 +46,11 @@ export default function ProductListingPage() {
 
 
     useEffect(()=>{
-
+        window.scrollTo({
+            top:0,
+            behavior:'instant'
+        })
         getAllProductFromApi();
-
         return ()=>{
             axios.CancelToken.source().cancel();
         }

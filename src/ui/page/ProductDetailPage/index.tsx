@@ -3,10 +3,6 @@ import NavList from "../../component/TopNavBar.tsx";
 import Footer from "../../component/Footer.tsx";
 import {ProductDetailDto} from "../../../data/dto/ProductListDto.ts";
 import {useEffect, useState} from "react";
-// import React from 'react';
-// import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-// import {faCartArrowDown} from "@fortawesome/free-solid-svg-icons/faCartArrowDown";
-// import Selector from "../../component/Selector.tsx";
 import {useNavigate, useParams} from "react-router-dom";
 import * as ProductApi from "../../../api/ProductApi.ts"
 import ProductDetailContainer from "../../component/ProductDetailContainer.tsx";
@@ -32,6 +28,7 @@ export default function ProductDetailPage() {
 
    const renderProductDetailContainer = ()=>{
         if(productDetailsData){
+            document.title = "Mario World -" + productDetailsData.name
             return   <ProductDetailContainer productDetailsData={productDetailsData}/>
         } else {
             return <LoadingContainer/>
@@ -40,6 +37,10 @@ export default function ProductDetailPage() {
 
 
     useEffect(() => {
+        window.scrollTo({
+            top:0,
+            behavior:'instant'
+        })
         if(productId) {
             setProductDetailData(undefined);
             getProductDetail(productId);

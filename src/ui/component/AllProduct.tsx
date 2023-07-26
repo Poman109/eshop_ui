@@ -69,9 +69,6 @@ export default function AllProduct(props:Props){
            <Button variant="success" style={buttonStyle}>詳細資料</Button>
             </Link>
 
-
-            <Button variant="success" style={paymentButtonStyle}  ><FontAwesomeIcon icon={faCartArrowDown} beatFade size="lg" style={{color: "#184e3b",}} /></Button>
-
         </Card.Body>
     </Card>
 

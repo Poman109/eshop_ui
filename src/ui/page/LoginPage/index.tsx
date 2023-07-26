@@ -35,6 +35,10 @@ export default function LoginPage(){
 
 
     useEffect(()=>{
+        window.scrollTo({
+            top:0,
+            behavior:'instant'
+        })
         if(loginUser){
             navigate("/");
         }

@@ -8,6 +8,8 @@ import {createContext, useEffect, useState} from "react";
 import * as FirebaseAuthService from "./authService/FirebaseAuthService.ts"
 import {UserData} from "./data/UserData.ts";
 import CheckoutPage from "./ui/page/CheckoutPage";
+import ThankYouPage from "./ui/page/ThankYouPage";
+import NoItemInCartPage from "./ui/page/NoItemInCartPage";
 
 export const loginUserContext = createContext<UserData | null | undefined>(undefined);
 
@@ -23,6 +25,9 @@ const router = createHashRouter([
     {
         path: "/shoppingcart",
         element: <ShoppingCart/>
+    },{
+        path: "/noitemincart",
+        element: <NoItemInCartPage/>
     },
     {
         path:"/error",
@@ -31,9 +36,19 @@ const router = createHashRouter([
     {
         path: "/login",
         element: <LoginPage/>
-    }, {
+    },
+    {
         path: "/checkout/:transactionId",
         element: <CheckoutPage/>
+    },
+    {
+        path: "/thankyou",
+        element: <ThankYouPage/>
+    },
+    {
+        path: "*",
+        element: <ProductListingPage/>
+
     }
 
 ])

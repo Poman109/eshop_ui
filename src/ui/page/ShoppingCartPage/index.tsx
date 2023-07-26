@@ -8,6 +8,7 @@ import {CartItemDataDto} from "../../../data/dto/CartItemDto.ts";
 import ShoppingCartTable from "../../component/ShoppingCartTable.tsx";
 import * as CartItemApi from "../../../api/CartItemApi.ts"
 import {loginUserContext} from "../../../App.tsx";
+import * as TransactionApi from "../../../api/TransactionApi.ts"
 
 
 
@@ -22,14 +23,19 @@ export default function ShoppingCartPage(){
     const getAllCartItem = async () =>{
         try{
             const data = await CartItemApi.getAllCartItems();
+
             setCartItemDetailsData(data);
 
         }catch (error){
-            navigate("/error");
+            navigate("/noitemincart");
         }
     }
 
     useEffect(()=>{
+        window.scrollTo({
+            top:0,
+            behavior:'instant'
+        })
         if (loginUser){
             setCartItemDetailsData(undefined)
             getAllCartItem();
@@ -51,6 +57,16 @@ export default function ShoppingCartPage(){
     const calculateTotalShipping = ()=>{
        return  calculateTotal() + 20
     }
+
+    const handleCheckout = async ()=>{
+        try {
+            const transactionData = await TransactionApi.prepareTransaction();
+            navigate(`/checkout/${transactionData.tid}`)
+        } catch (error){
+            navigate("/error");
+        }
+    }
+
 
     return(
 
@@ -86,13 +102,14 @@ export default function ShoppingCartPage(){
                         alignSelf: 'flex-end',marginRight:'1rem'
                     }}></hr>
                     <p style={{ alignSelf: 'flex-end',marginRight:'1rem' }}>訂單總額:$ {calculateTotalShipping().toLocaleString()}</p><br/>
-                    <Link to={"/checkout/:transactionId"} style={{alignSelf: 'flex-end',marginRight:'1rem'}}>
+                    <div style={{alignSelf: 'flex-end',marginRight:'1rem'}}>
                     <Button className='bouncing-image'
+                            onClick={handleCheckout}
                             style={{
                                 border:'0',
                                 backgroundColor: "#3d86a1"
 
-                            }}>付款</Button></Link>
+                            }}>付款</Button></div>
                 </div>
 
         </div>

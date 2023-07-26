@@ -4,7 +4,7 @@ import {Container} from "react-bootstrap";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-export default function ThankYouPage(){
+export default function NoItemInCartPage(){
     const [countdown, setCountdown]= useState<number>(5);
     const navigate = useNavigate();
 
@@ -31,10 +31,13 @@ export default function ThankYouPage(){
 
 
 
-                    <h2 style={{color: '#4876c2'}}>Thank You for Your Purchase!</h2>
-                    <img style={{width:'24rem'}}
-                        src="https://i.pinimg.com/originals/03/8d/c5/038dc5003e3f7fefca06ada0d8e5f2cc.gif"/>
-                    <h4 style={{color: '#4876c2'}}> {countdown} 秒後將回到主頁</h4>
+
+
+                <h2 style={{color: '#4876c2'}}>購物車沒有貨品!</h2>
+                <img style={{width:'24rem'}}
+                     src="https://media4.giphy.com/media/WoEr2sdaY4OaVg2xsf/200w.gif?cid=82a1493b6obs9qaujsw5pigq3tn36d79i0vrrln3z3a1qrq7&ep=v1_gifs_search&rid=200w.gif&ct=g"/>
+
+                <h4 style={{color: '#4876c2'}}> {countdown} 秒後將回到主頁</h4>
 
 
 

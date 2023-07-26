@@ -19,7 +19,7 @@ export default function ProductDetailContainer({productDetailsData}:Props){
     const navigate = useNavigate();
 
     const paymentButtonStyle = {
-        width: "20rem",
+        width: "15rem",
         backgroundImage: "linear-gradient(to right, #ffcccb, lightblue)",
         border: "0"
     };
@@ -63,11 +63,11 @@ export default function ProductDetailContainer({productDetailsData}:Props){
         <>
 
             <Container >
-                <Row className="d-flex justify-content-center" style={{width:'100%',margin:'2rem 4rem 0 0'}}>
+                <Row className="d-flex justify-content-center" style={{width:'100%',margin:'2rem 4rem 1rem 0'}}>
 
                     <Col md={6} style={{width: '40%'}}>
                         <div  className='d-flex justify-content-center align-items-center'
-                              style={{width: '35%', height: '35rem',marginLeft:'8rem'}}>
+                              style={{width: '35%', height: '35rem',margin:'-2rem 0 0 8rem'}}>
                             <Image style={{width:'30rem',height:'30rem'}} src={
                                 productDetailsData &&
                                 productDetailsData.image_url
@@ -87,7 +87,8 @@ export default function ProductDetailContainer({productDetailsData}:Props){
 
                                 <Card.Title>{productDetailsData?.name}</Card.Title><br/>
 
-                                <Card.Subtitle className="mb-2 text-muted">$ {productDetailsData?.price}</Card.Subtitle>
+                                <Card.Subtitle className="mb-2 text-muted"
+                                               style={{fontSize: '21px'}}>$ {productDetailsData?.price}</Card.Subtitle><br/>
 
                                 <Card.Text>
                                     {productDetailsData?.description && productDetailsData?.description.split('\n').map((line, index) => (

@@ -1,3 +1,5 @@
+import {ProductDetailDto} from "./ProductListDto.ts";
+
 export interface TransactionDataDto {
     transactionId: number;
     userId:        number;
@@ -6,21 +8,13 @@ export interface TransactionDataDto {
     datetime:      string;
     status:        string;
     total:         number;
-    items:         Item[];
+    items:         TransactionProductDto[];
 }
 
-export interface Item {
+export interface TransactionProductDto {
     tpid:     number;
-    product:  Product;
+    product:  ProductDetailDto;
     quantity: number;
     subtotal: number;
 }
 
-export interface Product {
-    pid:         number;
-    name:        string;
-    description: string;
-    price:       number;
-    stock:       number;
-    image_url:   string;
-}
