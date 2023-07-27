@@ -1,4 +1,4 @@
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Alert, Button, Col, Form} from "react-bootstrap";
 import NavList from "../../component/TopNavBar.tsx";
 import Footer from "../../component/Footer.tsx";
 import React, {useContext, useEffect, useState} from "react";
@@ -11,6 +11,7 @@ export default function LoginPage(){
     const[email, setEmail] = useState<string>("");
     const[password, setPassword] = useState<string>("")
     const loginUser = useContext(loginUserContext);
+    const [loginError, setLoginError] = useState(false);
 
     const handleEmailOnchange = ( event:React.ChangeEvent<HTMLInputElement>)=> {
         setEmail(event.currentTarget.value);
@@ -23,14 +24,20 @@ export default function LoginPage(){
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>)=> {
         event.preventDefault();
         const isLogin = await FirebaseAuthService.handleSignInWithEmailAndPassword(email,password);
-        navigate(-1);
+        if (isLogin) {
+            navigate(-1);
+        } else {
+            setLoginError(true);
+            setEmail("");
+            setPassword("");
+        }
     }
 
     const handleGoogleSignIn = async ()=> {
         const isLogin = await FirebaseAuthService.handleSignInWithGoogle();
         if (isLogin) {
          navigate(-1);
-      }
+        }
     }
 
 
@@ -43,6 +50,7 @@ export default function LoginPage(){
             navigate("/");
         }
 
+
     },[loginUser])
 
 
@@ -51,7 +59,8 @@ export default function LoginPage(){
             <NavList/>
             <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "calc(100vh - 12rem)", width:'100%'}}>
 
-                <Form className="rounded border d-flex flex-column align-items-center justify-content-center" style={{width:'30rem', height:'25rem'}} onSubmit={handleSubmit}>
+                <Form className="rounded border d-flex flex-column align-items-center justify-content-center"
+                      style={{width:'30rem', height:'30rem', margin:'2rem 0 2rem 0'}} onSubmit={handleSubmit}>
 
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label style={{color: '#236b88'}}>Email address</Form.Label>
@@ -80,6 +89,13 @@ export default function LoginPage(){
                                 color:'#236b88'}}>
                         Sign in
                     </Button><br/><br/>
+
+                    {loginError && (
+                        <Alert variant="danger">
+                            登入失敗！請重新登入。
+                        </Alert>
+                    )}
+
 
                     <hr style={{width:'80%'}}/>
 

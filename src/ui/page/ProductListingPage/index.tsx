@@ -69,10 +69,8 @@ export default function ProductListingPage() {
             <NavList/>
 
             <MyCarousel/>
-            <h5>Mario World: {location.pathname} </h5>
 
-
-            <Container style={{ display: 'd-flex flex-wrap', justifyContent: 'center'}}>
+            <Container style={{marginTop:'2rem', display: 'd-flex flex-wrap', justifyContent: 'center'}}>
 
                 <Row >
 

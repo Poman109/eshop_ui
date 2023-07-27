@@ -25,11 +25,6 @@ export default function AllProduct(props:Props){
         border:"0"
     };
 
-    const paymentButtonStyle = {
-        marginLeft:"150px",
-        backgroundImage: "linear-gradient(to right, #ffcccb, lightblue)",
-        border:"0"
-    };
 
     const openModal = () => {
         setModalOpen(true);

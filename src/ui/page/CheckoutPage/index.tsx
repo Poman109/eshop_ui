@@ -1,7 +1,5 @@
 
 import {Col, FormControl, Row, Table} from "react-bootstrap";
-import NavList from "../../component/TopNavBar.tsx";
-import Footer from "../../component/Footer.tsx";
 import {useEffect, useState} from "react";
 import {TransactionDataDto} from "../../../data/dto/TransactionDataDto.ts";
 import LoadingContainer from "../../component/LoadingContainer.tsx";
@@ -100,7 +98,6 @@ export default function CheckoutPage(){
 
     return(
         <>
-            <NavList/>
             <div  style={{ minHeight: "calc(100vh - 12rem)", width:'100%'}}>
 
             <div style={{margin:'2rem 2rem 2rem 2rem'}}>
@@ -200,7 +197,6 @@ export default function CheckoutPage(){
             </div>
 
             </div>
-            <Footer/>
 
         </>
     )

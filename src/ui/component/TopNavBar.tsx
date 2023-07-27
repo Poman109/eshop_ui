@@ -1,4 +1,4 @@
-import {Button, Nav} from "react-bootstrap";
+import {Button, Nav, Spinner} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import "./TopNavBarStyle.css"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -17,12 +17,14 @@ export default function NavList(){
                 <FontAwesomeIcon icon={faFingerprint} size="2xl" style={{color: "#1d4281",marginRight:'1rem'}} />
                 <Button style={loginButtonStyle} onClick={FirebaseAuthService.handleSignOut}>Logout</Button>
             </>
-        } else {
+        } else if (loginUser === null){
             return    <Link to="/login" style={{textDecoration: 'none'}}>
                 <Button  style={loginButtonStyle} >
                    Login
                 </Button>{''}
             </Link>
+        } else {
+           return  <Spinner animation="border" variant={"light"}/>
         }
     }
 

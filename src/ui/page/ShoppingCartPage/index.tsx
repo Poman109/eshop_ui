@@ -3,7 +3,7 @@ import Footer from "../../component/Footer.tsx";
 import "../../component/TopNavBarStyle.css"
 import {Button} from "react-bootstrap";
 import {useContext, useEffect, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {CartItemDataDto} from "../../../data/dto/CartItemDto.ts";
 import ShoppingCartTable from "../../component/ShoppingCartTable.tsx";
 import * as CartItemApi from "../../../api/CartItemApi.ts"
@@ -42,6 +42,7 @@ export default function ShoppingCartPage(){
         } else if (loginUser ===null){
             navigate("/login");
         }
+
     },[loginUser]);
 
     const calculateTotal = ()=>{
