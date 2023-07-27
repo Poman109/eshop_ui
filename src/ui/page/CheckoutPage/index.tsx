@@ -79,7 +79,7 @@ export default function CheckoutPage(){
                                 </div>
                             );
                         })}</td>
-                    <td>＄ {transactionDetailsData?.total}</td>
+                    <td>＄ {transactionDetailsData?.total + 40}</td>
                     <td>{transactionDetailsData?.datetime}</td>
                     <td>{transactionDetailsData?.status}</td>
 
@@ -129,7 +129,7 @@ export default function CheckoutPage(){
 
                 <div className="container p-0" style={{width:'50rem',marginLeft:'6rem'}}>
                     <div className="card px-4">
-                        <p className="h8 py-3">Payment Details</p>
+                        <p className="h8 py-3" style={{fontWeight:'bold',fontSize:'20px'}}>Payment Details</p>
                         <div className="row gx-3">
                             <div className="col-12">
                                 <div className="d-flex flex-column">

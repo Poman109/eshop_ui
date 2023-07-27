@@ -1,7 +1,5 @@
 import {Button, Card, Modal} from "react-bootstrap";
 import {ProductListDto} from "../../data/dto/ProductListDto.ts";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCartArrowDown} from "@fortawesome/free-solid-svg-icons/faCartArrowDown";
 import  {useState} from "react";
 import {Link} from "react-router-dom";
 
@@ -45,17 +43,17 @@ export default function AllProduct(props:Props){
 
        <Card.Body>
 
-            <Card.Title style={{height:"45px"}}>{props.allProductData.name}</Card.Title>
+            <Card.Title style={{height:"45px",color:'#246078'}}>{props.allProductData.name}</Card.Title>
 
-            <Card.Text>
+            <Card.Text style={{color:'#246078'}}>
                貨品編號： {props.allProductData.pid}
             </Card.Text>
 
-            <Card.Text>
+            <Card.Text style={{color:'#246078'}}>
                貨品庫貨 :  {props.allProductData.has_stock?"有貨":"售罄"}
             </Card.Text>
 
-            <Card.Text>
+            <Card.Text style={{color:'#246078'}}>
                 貨品價錢：$ {props.allProductData.price}
             </Card.Text>
 

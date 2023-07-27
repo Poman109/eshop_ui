@@ -16,7 +16,7 @@ export default function MyCarousel() {
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                    <h3 style={{fontSize:'50px',margin:'2rem 0 20rem 0'}}>New Arrival !!!</h3>
+                    <h3 style={{fontSize:'50px',margin:'2rem 0 20rem 0'}}>New Arrivals !!!</h3>
                 </Carousel.Caption>
             </Carousel.Item>
 
